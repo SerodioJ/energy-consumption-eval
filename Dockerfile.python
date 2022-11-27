@@ -1,0 +1,12 @@
+FROM serodioj/pypapi:6.0.0.1
+
+WORKDIR /app
+
+RUN pip install requests
+
+COPY python_app/computation.py computation.py
+
+ENV PYTHON_COMP="matmul"
+ENV BASE_URL="http://127.0.0.1:8000"
+
+CMD ["python3", "computation.py"]
