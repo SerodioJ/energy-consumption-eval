@@ -1,0 +1,4 @@
+interface ComputationLoad {
+	void initData()
+    void compute()
+}

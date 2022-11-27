@@ -1,0 +1,16 @@
+FROM serodioj/dana:v256
+
+WORKDIR /app
+COPY dana_app/ /app
+
+RUN dnc computation/ -v \
+    dnc util/ -v && \
+    dnc . -v
+
+ENV DANA_COMP="MatMul"
+ENV BASE_URL="http://127.0.0.1:8000"
+ENV MATRIX_M=50
+ENV MATRIX_N=50
+ENV MATRIX_P=50
+
+CMD ["dana", "-lc='computation.ComputationLoad|computation/${DANA_COMP}.o'", "App.o"]

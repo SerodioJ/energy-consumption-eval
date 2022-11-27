@@ -1,0 +1,4 @@
+interface InitData {
+    void setRandomSeed(int seed)
+	dec[][] initMatrix(int M, int N)
+}

@@ -1,0 +1,29 @@
+component provides computation.ComputationLoad requires util.InitData init, os.SystemInfo info, data.IntUtil iu {
+    dec matrixA[][] = null
+    dec matrixB[][] = null
+    dec result[][] = null
+    
+
+    void ComputationLoad:initData(){
+        int M = iu.intFromString(info.getVariable("MATRIX_M"))
+        int N = iu.intFromString(info.getVariable("MATRIX_N"))
+        int P = iu.intFromString(info.getVariable("MATRIX_P"))
+        matrixA = init.initMatrix(M, N)
+        matrixB = init.initMatrix(N, P)
+        result = new dec[M][P]
+    }
+
+    void ComputationLoad:compute(){
+        int M = iu.intFromString(info.getVariable("MATRIX_M"))
+        int N = iu.intFromString(info.getVariable("MATRIX_N"))
+        int P = iu.intFromString(info.getVariable("MATRIX_P"))
+        for (int j = 0; j < P; j++){
+            for (int i = 0; i < M; i++){
+                result[i][j] = 0.0
+                for (int k = 0; k < N; k++){
+                    result[i][j] = result[i][j] + matrixA[i][k]*matrixB[k][j]
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,20 @@
+
+component provides App requires util.EnergyService energy, util.InitData init, data.DecUtil du, io.Output out, time.Timer time, computation.ComputationLoad compute {
+    
+    int App:main(AppParam params[]){
+        init.setRandomSeed(10)
+        while(true){
+            time.sleep(10000)
+            StartResponse res = energy.startMeasurements("data_init")
+            compute.initData()
+            EndResponse values = energy.endMeasuments(res.uuid)
+            out.println(new char[]("DATA_INIT: ", du.makeString(values.energy), " J, ", du.makeString(values.time), " s"))
+
+            res = energy.startMeasurements("computation")
+            compute.compute()
+            values = energy.endMeasuments(res.uuid)
+            out.println(new char[]("COMPUTATION: ", du.makeString(values.energy), " J, ", du.makeString(values.time), " s"))
+        }
+        return 0
+        }
+    }

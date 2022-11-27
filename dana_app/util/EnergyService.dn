@@ -1,0 +1,21 @@
+component provides util.EnergyService requires net.http.HTTPRequest http, data.json.JSONEncoder json, os.SystemInfo info {
+
+    StartResponse EnergyService:startMeasurements(char region[]){
+        StartPayload payload = new StartPayload()
+        char base_url[] = info.getVariable("BASE_URL")
+        payload.region = region
+        HTTPResponse resp = http.post(new char[](base_url, "/region/start"), null, json.jsonFromData(payload))
+        StartResponse respContent = json.jsonToData(resp.content, typeof(StartResponse))
+        return respContent
+    }
+
+    EndResponse EnergyService:endMeasuments(char uuid[]){
+        StartResponse payload = new StartResponse()
+        char base_url[] = info.getVariable("BASE_URL")
+        payload.uuid = uuid
+        HTTPResponse resp = http.post(new char[](base_url, "/region/end"), null, json.jsonFromData(payload))
+        EndResponse respContent = json.jsonToData(resp.content, typeof(EndResponse))
+        return respContent
+    }
+
+}

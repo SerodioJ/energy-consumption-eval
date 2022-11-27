@@ -1,0 +1,19 @@
+data StartPayload{
+    char region[]
+}
+
+data StartResponse{
+    char uuid[]
+}
+
+data EndResponse{
+    dec energy
+    dec time
+    dec power[]
+    dec ts[]
+}
+
+interface EnergyService {
+	StartResponse startMeasurements(char region[])
+    EndResponse endMeasuments(char uuid[])
+}
