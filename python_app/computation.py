@@ -5,7 +5,7 @@ import requests
 from time import sleep
 
 def fft():
-    size = int(1e8)
+    size = int(os.getenv("DIM_SIZE", 1e7))
     start = requests.post(f"{base_url}/region/start",json={"region": "data_init"})
     a = np.random.rand(size)*100
     end = requests.post(f"{base_url}/region/end",json=start.json())
@@ -19,7 +19,7 @@ def fft():
     print(f"FFT - COMPUTATION: {results['energy']} J, {results['time']} s")
 
 def matmul():
-    size = int(1e5)
+    size = int(os.getenv("DIM_SIZE", 1e3))
     start = requests.post(f"{base_url}/region/start",json={"region": "data_init"})
     a = np.random.rand(size,size)*100
     b = np.random.rand(size,size)*100
