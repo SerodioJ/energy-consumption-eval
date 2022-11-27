@@ -1,1 +1,1 @@
-# Energy Consummption Service Evaluation Apps
+# Energy Consumption Service Evaluation Apps
