@@ -13,4 +13,6 @@ ENV MATRIX_M=50
 ENV MATRIX_N=50
 ENV MATRIX_P=50
 
-CMD ["dana", "-lc='computation.ComputationLoad|computation/${DANA_COMP}.o'", "App.o"]
+COPY dana_entrypoint.sh entrypoint.sh
+
+ENTRYPOINT [ "/app/entrypoint.sh" ]
