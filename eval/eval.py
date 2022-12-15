@@ -43,6 +43,17 @@ def extract_args(args):
 
 
 
+def delete_deployment(deployment):
+    config.load_kube_config()
+    v1 = client.AppsV1Api()
+    try:
+        v1.delete_namespaced_deployment(
+            name=deployment["metadata"]["name"], namespace="default"
+        )
+    except ApiException as e:
+        pass
+    return
+
 def update_deployment(deployment, conf):
     config.load_kube_config()
     v1 = client.AppsV1Api()
@@ -82,6 +93,8 @@ def evaluate(args):
 
         with open(os.path.join(output, f"{placement}_{config}_regions.csv"), "w") as f:
             f.write(regions.text)
+    delete_deployment(deployment)
+    
 
 
 if __name__ == "__main__":
@@ -124,7 +137,7 @@ if __name__ == "__main__":
         "-p",
         "--placement",
         help="where to place service",
-        choices=["rasp3", "rasp4", "intel"],
+        choices=["rasp3", "rasp4", "xps", "g3"],
         default="rasp4",
     )
 
