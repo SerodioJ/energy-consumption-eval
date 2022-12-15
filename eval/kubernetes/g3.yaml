@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: energy-consumption-intel
+  name: energy-consumption-g3
   labels:
-    app: energy-consumption-intel
+    app: energy-consumption-g3
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: energy-consumption-intel
+      app: energy-consumption-g3
   template:
     metadata:
       labels:
-        app: energy-consumption-intel
+        app: energy-consumption-g3
     spec:
       nodeSelector:
         placement: edge
-        type: intel
+        type: g3
       containers:
       - name: ecs
         image: serodioj/energy-consumption-service:latest

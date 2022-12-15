@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: energy-consumption-xps
+  labels:
+    app: energy-consumption-xps
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: energy-consumption-xps
+  template:
+    metadata:
+      labels:
+        app: energy-consumption-xps
+    spec:
+      nodeSelector:
+        placement: edge
+        type: xps
+      containers:
+      - name: ecs
+        image: serodioj/energy-consumption-service:latest
+        ports:
+        - containerPort: 8000
+          hostPort: 8000
+        env:
+        - name: hardware_config
+          value: "default"
+      - name: proxy
+        image: serodioj/ecs-proxy:python
+        env:
+        - name: PYTHON_COMP
+          value: "matmul"
