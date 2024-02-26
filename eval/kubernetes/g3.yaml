@@ -19,7 +19,7 @@ spec:
         type: g3
       containers:
       - name: ecs
-        image: serodioj/energy-consumption-service:latest
+        image: serodioj/energy-consumption-service:amd64
         ports:
         - containerPort: 8000
           hostPort: 8000
